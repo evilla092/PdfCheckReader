@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_02_203634) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_02_204947) do
+  create_table "employers", force: :cascade do |t|
+    t.string "name"
+    t.decimal "dues_rate", precision: 5, scale: 2
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_employers_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -26,4 +35,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_02_203634) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "employers", "users"
 end
