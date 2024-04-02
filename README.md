@@ -1,54 +1,61 @@
-# Rails Template
+# Check Detail Reader/Analyzer Specificartion
+A simple web app that allows users to upload pdf documents, receive an analysis of the detail, and be able to print a CSV version if necessary using Amazon Textract API.
 
-This is a base Ruby on Rails repository configured for learning with Codespaces (and Gitpod).
+## Pain Point
+Having to manually read and type out information from financial files that come in PDF format and not being able to run an analysis on check detail until it has been processed into a CRM.
 
-- Ruby version: `3.2.1`
-- Rails version: `7.0.4.3`
+## User Stories
+- As a user, I want to be able to log in/register for an account and upload PDF's.
+- As a user , I want to be able to see red flags that appear with a dues amounts after processing a pdf through the web app.
+- As a user, I want to be able to download a CSV file of the PDF i jus uploaded.
+- As a user, I want to be able to have the system prompt me if there was an issue deciding what numbers or letters to use whenever the OCR runs into issues.
+- As a user, I want to be able to see a history of red flags, possibly even a graph, from the employer I select.
+- As a user, I want to be able to select the employer I want from a drop down list that includes all the employers. 
+- As a user, I want the web app to be visually appealing and not cluttered so it looks safe and simple.
 
+## Domain Model
 
-We've added additional Ruby gems and other software that aren't automatically available in a new Rails app.
+### users
+- id
+- created_at
+- updated_at
+- email
+- password
+- admin
+- full_name
 
-### Additional gems:
+### employers
+- id
+- created_at
+- updated_at
+- user_id
+- rate
+- name
 
-- [`appdev_support`](https://github.com/firstdraft/appdev_support)
-- [`annotate`](https://github.com/ctran/annotate_models)
-- [`awesome_print`](https://github.com/awesome-print/awesome_print)
-- [`better_errors`](https://github.com/BetterErrors/better_errors)
-- [`binding_of_caller`](https://github.com/banister/binding_of_caller)
-- [`dotenv-rails`](https://github.com/bkeepers/dotenv)
-- [`draft_generators`](https://github.com/firstdraft/draft_generators/)
-- [`draft_matchers`](https://github.com/jelaniwoods/draft_matchers/)
-- [`devise`](https://github.com/heartcombo/devise)
-- [`faker`](https://github.com/faker-ruby/faker)
-- [`grade_runner`](https://github.com/firstdraft/grade_runner/)
-- [`htmlbeautifier`](https://github.com/threedaymonk/htmlbeautifier/)
-- [`http`](https://github.com/httprb/http)
-- [`pry_rails`](https://github.com/pry/pry-rails)
-- [`rails_db`](https://github.com/igorkasyanchuk/rails_db)
-- [`rails-erd`](https://github.com/voormedia/rails-erd)
-- [`rspec-html-matchers`](https://github.com/kucaahbe/rspec-html-matchers)
-- [`rspec-rails`](https://github.com/rspec/rspec-rails)
-- [`rufo`](https://github.com/ruby-formatter/rufo)
-- [`specs_to_readme`](https://github.com/firstdraft/specs_to_readme)
-- [`table_print`](https://github.com/arches/table_print)
-- [`web_git`](https://github.com/firstdraft/web_git)
-- [`webmock`](https://github.com/bblimke/webmock)
+### checks
+- id
+- created_at
+- updated_at
+- period_ending_date
+- employer_id
+- check_num
+- check_amount
 
-### Additional software:
-- OS Ubuntu 20.04.5 LTS
-- Chromedriver
-- Fly.io's `flyctl`
-- Google Chrome (headless browser)
-- Graphviz
-- Heroku 
-- Node JS 18
-- NPM 8.19.3
-- Parity
-- Postgresql 12
-- Redis
-- Yarn
+### members
+- id
+- created_at
+- updated_at
+- first_name
+- last_name
+- address
+- total_wages_earned
+- dues_payment
+- cope_payment
+- check_id
 
-### VS Code extensions:
-- aliariff.vscode-erb-beautify
-- mbessey.vscode-rufo
-- vortizhe.simple-ruby-erb
+### check_infractions
+- id
+- created_at
+- updated_at
+- detail_infraction_count
+- check_id
