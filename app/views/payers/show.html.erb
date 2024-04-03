@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @payer %>
+
+<div>
+  <%= link_to "Edit this payer", edit_payer_path(@payer) %> |
+  <%= link_to "Back to payers", payers_path %>
+
+  <%= button_to "Destroy this payer", @payer, method: :delete %>
+</div>

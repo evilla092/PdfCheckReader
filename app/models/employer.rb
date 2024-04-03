@@ -19,4 +19,6 @@
 #
 class Employer < ApplicationRecord
   belongs_to :user
+  has_many :checks
+  has_many :payers, through: :checks
 end

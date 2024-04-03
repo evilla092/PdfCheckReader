@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Payers</h1>
+
+<div id="payers">
+  <% @payers.each do |payer| %>
+    <%= render payer %>
+    <p>
+      <%= link_to "Show this payer", payer %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New payer", new_payer_path %>
