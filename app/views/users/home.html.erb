@@ -1,6 +1,8 @@
 <h2>You are currently logged in as <%= current_user.email %> </h4> 
 
-<%= render "users/upload" %>
+<%= render "documents/upload_form" %>
+<br>
+
 
 <br>
 <br>
@@ -11,8 +13,11 @@
 <br>
 
 <%= link_to "Add Employer", new_employer_path %>
+<br>
+<br>
 
 <h4><%= link_to 'Employers', employers_path %><h4>
+<br>
 <ul>
 <% Employer.all.each do |employer| %>
 <li> <%= employer.name %> </li>

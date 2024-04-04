@@ -1,0 +1,6 @@
+<p>Please select the employer that this check belongs to: </p>
+<select name="cars">
+  <% Employer.all.each do |employer|%>
+  <option value="<%= employer.name %>"><%= employer.name %>"</option>
+  <% end %>
+</select>

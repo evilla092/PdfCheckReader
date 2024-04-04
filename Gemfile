@@ -73,6 +73,7 @@ end
 
 # AppDev Gems
 # ===========
+gem 'aws-sdk-s3', require: false
 gem "appdev_support"
 gem "awesome_print"
 gem "devise"       # to be removed
@@ -107,3 +108,5 @@ group :test do
   gem "rspec-html-matchers"
   gem "webmock"
 end
+
+gem "image_processing", "~> 1.12"
