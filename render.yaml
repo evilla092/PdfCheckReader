@@ -1,10 +1,20 @@
+databases:
+  - name: pdf-check-reader
+    plan: free
+    databaseName: pdf-check-reader
+    user: pdf-check-reader
+
 services:
   - type: web
-    name: my-app-name # the name of this service, eg hello-world
-    env: ruby # this app is written in ruby
-    plan: free # make sure to set this to free or you'll get billed $$$
-    buildCommand: "./bin/render-build.sh" # # we already created these two files for you
+    name: pdf-check-reader
+    plan: free
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
     startCommand: "./bin/render-start.sh"
-    envVars: # this section sets some ENV variables needed by Render for deployment
-      - key: SECRET_KEY_BASE
-        generateValue: true
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: pdf-check-reader
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
