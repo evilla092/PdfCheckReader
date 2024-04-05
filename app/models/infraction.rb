@@ -18,4 +18,5 @@
 #  payer_id  (payer_id => payers.id)
 #
 class Infraction < ApplicationRecord
+  belongs_to :payer
 end
