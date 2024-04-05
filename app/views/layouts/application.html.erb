@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rails Template</title>
+    <title>Check Check</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= render partial: "shared/cdn_assets" %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
   </head>
 
   <body>
-    <%= yield %>
-  </body>
-</html>
+    <%= render "shared/nav" %>
+    <div>
+      <% if notice %>
+        <div class="alert alert-success">
+          <%= notice %>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="alert alert-danger">
+          <%= alert %>
+        </div>
+      <% end %>
+      <div class='container mt-4'>
+        <%= yield %>
+      </div>
+    </body>
+  </html>

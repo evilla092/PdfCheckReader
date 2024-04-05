@@ -1,0 +1,12 @@
+<h3>Upload a PDF</h3>
+
+<%#= form_with model: @document, url: documents_path, local: true do |form| %>
+  <%#= form.file_field :file %>
+  <%#= form.submit %>
+<%# end %>
+<!---->
+
+<%= form_with model: @document, url: documents_path, local: true do |form| %>
+  <%= form.file_field :file, name: 'document[file]' %>
+  <%= form.submit %>
+<% end %>

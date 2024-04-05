@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @infraction %>
+
+<div>
+  <%= link_to "Edit this infraction", edit_infraction_path(@infraction) %> |
+  <%= link_to "Back to infractions", infractions_path %>
+
+  <%= button_to "Destroy this infraction", @infraction, method: :delete %>
+</div>

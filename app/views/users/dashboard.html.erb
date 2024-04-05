@@ -1,0 +1,25 @@
+<h2>You are currently logged in as <%= current_user.email %> </h4> 
+
+<%= render "documents/upload_form" %>
+<br>
+
+
+<br>
+<br>
+
+<%= link_to 'Checks Processed Log', checks_path %>
+
+<br>
+<br>
+
+<%= link_to "Add Employer", new_employer_path %>
+<br>
+<br>
+
+<h4><%= link_to 'Employers', employers_path %><h4>
+<br>
+<ul>
+<% Employer.all.each do |employer| %>
+<li> <%= employer.name %> </li>
+<% end %>
+</ul>
