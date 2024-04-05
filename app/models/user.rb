@@ -22,7 +22,6 @@
 class User < ApplicationRecord
   has_many :employers
   has_many :checks
-  has_one_attached :document
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
