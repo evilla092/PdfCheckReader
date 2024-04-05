@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   get "/documents/survey", to: "documents#survey"
   resources :documents
   
-  root "users#home"
+  root "users#dashboard"
 end
