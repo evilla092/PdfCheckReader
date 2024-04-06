@@ -65,6 +65,6 @@ class ChecksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def check_params
-      params.require(:check).permit(:check_date, :check_amount, :infraction_count, :user_id)
+      params.require(:check).permit(:check_date, :check_amount, :infraction_count, :user_id, :employer_id)
     end
 end

@@ -65,6 +65,6 @@ class InfractionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def infraction_params
-      params.require(:infraction).permit(:member_id, :note, :passed)
+      params.require(:infraction).permit(:payer_id, :note, :passed)
     end
 end
