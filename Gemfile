@@ -84,6 +84,7 @@ gem "http"
 gem "sqlite3", "~> 1.4"
 gem "table_print"
 gem 'annotate'
+gem 'simple_form'
 
 
 group :development do
