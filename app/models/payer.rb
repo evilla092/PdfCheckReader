@@ -22,6 +22,7 @@
 #
 class Payer < ApplicationRecord
   belongs_to :check
-  belongs_to :employer, through: :check
+  has_many :employers, through: :check
+  has_many :infractions
   
 end
