@@ -85,6 +85,8 @@ gem "sqlite3", "~> 1.4"
 gem "table_print"
 gem 'annotate'
 gem 'simple_form'
+gem "aws-sdk"
+gem 'aws-sdk-textract'
 
 
 group :development do

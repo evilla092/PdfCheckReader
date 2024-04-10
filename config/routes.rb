@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   get "/documents/survey", to: "documents#survey"
+  get "/documents/loading", to: "documents#loading"
   resources :documents
   
   root "users#dashboard"
