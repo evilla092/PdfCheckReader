@@ -1,6 +1,10 @@
 <p>Please select the employer that this check belongs to: </p>
-<select name="cars">
-  <% Employer.all.each do |employer|%>
-  <option value="<%= employer.name %>"><%= employer.name %>"</option>
-  <% end %>
-</select>
+<form id="employer_form" action="/documents/loading" method="get">
+  <select name="employer_id" id="employer_id">
+    <% Employer.all.each do |employer| %>
+      <option value="<%= employer.id %>"><%= employer.name %></option>
+    <% end %>
+  </select>
+  <input type="hidden" name="s3_name" id="s3_name" value="<%= params[:s3_name] %>">
+  <input type="submit" value="Submit" class="btn btn-primary">
+</form>

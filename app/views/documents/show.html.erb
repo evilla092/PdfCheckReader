@@ -1,16 +1,17 @@
 <h1>Document Details</h1>
+<% @document %>
+<p>s3 name: <%= @s3_name %></p>
 
 
 <div class="text-center">
 <p>Is this the file you are trying to process?</p>
-<%= link_to "Yes, begin processing", "/documents/survey", class: "btn btn-primary" %>
+<%= link_to "Yes, begin processing", "/documents/survey?s3_name=#{@s3_name}", class: "btn btn-primary" %>
 <%= link_to "No, upload a different file", root_path, class: "btn btn-primary" %>
 </div>
 <br>
 
 
-<% document = Document.find(params[:id]).file %>
 
 <div class="text-center">
-<iframe src="<%= url_for(document) %>" width="100%" height="500px"></iframe>
+<iframe src="<%= url_for(@document) %>" width="100%" height="500px"></iframe>
 </div>

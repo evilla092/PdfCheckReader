@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   get "/documents/survey", to: "documents#survey"
+  get "/documents/loading", to: "documents#loading"
+  get "/users/dashboard", to: "users#dashboard", as: "dashboard"
+  get '/documents/download_csv', to: 'documents#download_csv', as: 'download_csv'
   resources :documents
   
-  root "users#dashboard"
+  root "users#home"
 end

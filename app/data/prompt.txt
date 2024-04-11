@@ -1,0 +1,36 @@
+You have a set of financial records in the form of a string, which was converted from scanned documents using OCR. The data is somewhat messy due to errors in the conversion process. Your task is to parse this data and convert it into a structured JSON hash format.
+
+The data consists of multiple lines, where each line represents information about an individual. Each line contains the following attributes:
+
+Name: The name of the individual (may contain commas).
+Client Code: A unique identifier for the client.
+Department Amount: The amount associated with the department.
+Rate: The rate at which the individual is paid.
+Total Hours: The total number of hours worked.
+Gross Wages: The gross wages earned.
+Here's an example of the data:
+["Value", "Date:", "09/14/2023 Program: 5974 - Chicago SEIU LOCAL 880 Batch Number: 636 Item Number: 4", "LINEAGE HEALTHCARE", "Client: 0JZ46", "Atrium Payroll Deductions Union", "TR1: 1 Transaction", "Client Code", "Sac-Sec. No.", "Dept Amount", "Rate", "Tot Hrs(TRt)", "Gross Wages(TR1)", "0JZ47", "ABRAHAM, ELIZABETH OMOHOWA", "000000000 0003", "$35.00 18.00", "72.25", "$1,300.50", "0JZ47", "ADAMS, RAPHAEL FEMI", "000000001 0003", "$34.30 18.00", "57.75", "$1,039.50", "0JZ47", "ADEBAYU, ATRIUM ADEKUNLE", "000000054 0003", "$35.00 26.50", "90.50", "$2,464.50", "0JZ47", "ADEKOYA, ADEDAPOMOLA", "144595607 0003", "$35.00 18.50", "93.75", "$1,861.56", "0JZ47", "ADENIYI, OLUSOJI", "000000051 0003", "$35.00 24.50", "83.00", "$2,100.88", "0JZ47", "ADEOLA, LUQMAN", "088373260 0003", "$35.00 24.50", "76.00", "$1,929.38", "0JZ47", "ADEYEMI, ODUNAYO", "380979028 0007", "$35.00 18.00", "85.00", "$1,588.50", "0JZ47", "ALLEN, HENRY", "326743305 0005", "$35.00 21.00", "97.25", "$2,223.38", "0JZ47", "ALLISON, LACRESHA", "342845934 0007", "$35.00 17.50", "70.75", "$1,238.13", "0JZ47", "ALULEMA, SEGUNDO JOSE", "313901339 0006", "$35.00 17.75", "92.25", "$1,757.25", "0JZ47", "ANDERSON, MARFINA", "357703352 0005", "$35.00 20.00", "74.00", "$1,480.00", "0JZ47", "APARICIO, MARCEDALIA", "396827515 0006", "$35.00 22.00", "68.50", "$1,683.00", "0JZ47", "ARTEAGA-RAMIREZ, OLIVA", "546784638 0006", "$35.00 20.00", "68.50", "$1,530.00", "0JZ47", "AYANTOLA, NOFISAT OMOBOLA", "000000007 0003", "$35.00 21.50", "102.25", "$2,437.56", "0JZ47", "BELLO, RAMON ADEYEMI", "000000008 0003", "$35.00 19.50", "76.00", "$1,647.75", "0JZ47", "CHIGBU, CHUKWUEMEKA CHARLES", "339793225 0004", "$35.00 17.50", "104.75", "$2,049.69", "0JZ47", "DARA, CHINWENDU", "000000010 0003", "$32.18 23.50", "37.50", "$975.25", "0JZ47", "ENILARI, OLUWASEYI", "000000011 0003", "$35.00 20.50", "93.00", "$2,121.75", "0JZ47", "FALODUN, FLORENCE ABOSEDE", "000000012 0003", "$35.00 18.00", "73.00", "$1,314.00", "0JZ47", "FLORES, ROSA", "377485014 0005", "$35.00 21.00", "76.25", "$1,601.25", "0JZ47", "HARVEY, KEYSHAWN", "329044665 0005", "$33.21 17.50", "57.50", "$1,006.25", "0JZ47", "HAYNES, JANE", "347460207 0003", "$35.00 27.50", "67.50", "$1,925.00", "0JZ47", "HERNANDEZ, CONSUELO", "336115176 0009", "$35.00 22.00", "67.75", "$1,666.50", "0JZ47", "HERNANDEZ, IRMA", "345780965 0006", "$35.00 22.00", "101.25", "$2,263.25", "0JZ47", "HERNANDEZ, SYLVIA", "388110011 0006", "$35.00 18.75", "83.25", "$1,560.94", "0JZ47", "HERNANDEZ-CASTANEDA, GERARDO", "614224355 0006", "$35.00 22.00", "84.50", "$1,927.75", "0JZ47", "HERNANDEZ-SALAZAR, DAGOBERTO", "326826491 0016", "$35.00 28.05", "50.00", "$1,402.50", "0JZ47", "HOLDEN, CHINELO", "658849393 0003", "$35.00 20.50", "68.50", "$1,791.19", "0JZ47", "WALEWA, ANNE", "000000013 0003", "$35.00 23.50", "62.25", "$1,812.44", "0JZ47", "JOHNSON, SYLVIA", "350488229 0003", "$35.00 27.50", "62.25", "$1,718.76", "0JZ47", "KAREEM, OYENIYI FUNMILAYO", "000000014 0003", "$35.00 18.00", "77.00", "$1,413.00", "0JZ47", "KWAKYE, AARON", "361884718 0004", "$35.00 19.00", "77.50", "$1,472.50", "0JZ47", "LAGUNAS, OFELIA", "342080987 0009", "$35.00 20.00", "147.50", "$3,110.00", "0JZ47", "LOVE LLL, DEWHITT", "335762106 0005", "$35.00 20.00", "113.75", "$2,612.50", "0JZ47", "MACWAN, RAJESHKUMAR KANT", "792904585 0006", "$35.00 17.50", "68.00", "$1,470.00", "0JZ47", "MADOJEMU, REBECCA E", "129454810 0003", "$35.00 19.50", "99.25", "$2,123.06", "0JZ47", "MARTINEZ, JUANA", "317542790 0006", "$35.00 22.00", "67.60", "$1,663.20", "0JZ47", "MEANS, JEANETTA", "343544406 0003", "$35.00 27.50", "75.00", "$2,062.50", "0JZ47", "MOULITE. RALPH", "320614066 0005", "$35.00 18.75", "71.50", "$1,340.63", "0JZ47", "NOBLE, DOLLY", "348669909 0005", "$35.00 17.50", "109.25", "$2,167.81", "0JZ47", "NSORO, NELSON", "000000016 0003", "$35.00 20.50", "108.75", "$2,688.06", "0JZ47", "NWAEZE CHIMA", "000000044 0003", "$35.00 18.00", "85.75", "$1,604.25", "0JZ47", "NWANOKWAI, PHILIP", "000000009 0003", "$35.00 18.00", "136.50", "$3,037.50", "0JZ47", "OBAADEWALE, OMOBOLANLE", "000000017 0003", "$35.00 22.50", "135.75", "$3,681.56", "0JZ47", "OGINNI ATRIUM, TOYIN", "000000019 0003", "$16.71 22.50", "30.50", "$686.25", "0JZ47", "OGUNBAYO, OMOTAYO AYODEJI", "791667681 0003", "$17.82 18.00", "30.00", "$540.00", "0JZ47", "OGUNOLA, OMOWUMI ADETOLA", "000000021 0003", "$35.00 21.50", "106.00", "$2,558.50", "0JZ47", "OKANLAWON, OLUSEGUN", "000000022 0003", "$35.00 22.50", "78.25", "$1,805.63", "0JZ47", "OLABODE, GANIYAT", "691490050 0003", "$35.00 19.50", "138.75", "$3,395.44", "0JZ47", "OLUMIDE, OYENIKE", "692384639 0003", "$35.00 18.50", "83.75", "$1,676.56", "0JZ47", "OMOTEHINSE, AGNES", "000000024 0003", "$35.00 21.50", "103.25", "$2,469.81", "0JZ47", "OMOYAJOWO, AYODEJI OLATUNJI", "000000025 0003", "$35.00 20.50", "80.25", "$1,944.94", "0JZ47", "ONALAJA, ADEWALE OLUMIDE", "000000026 0003", "$35.00 20.50", "172.25", "$4,476.69", "0JZ47", "OPALEYE, CHIRISTIAN", "000000027 0003", "$35.00 19.50", "83.25", "$1,672.13", "0JZ47", "ORTEGA, TERESA", "346948217 0006", "$35.00 22.00", "81.75", "$1,823.25", "Page 14 of 345"]
+Your algorithm should be able to handle variations in the formatting of the data and extract the relevant information accurately. Specifically, ensure that:
+
+The name field may contain commas, so ensure it is parsed correctly.
+The client code, department amount, rate, total hours, and gross wages should be converted to appropriate data types (e.g., integers or floats).
+Take into account that the data may contain errors or inconsistencies due to OCR conversion, such as missing values or incorrect formatting.
+Once you've parsed the data, organize it into a JSON hash that followes a structure similar to this but make sure the keys match the example below, its OCR data so it can be messy and its best to look at the data closely when structuring it:
+
+{
+  "members": [
+    {
+      "name": "Name of the individual",
+      "dues_amount": amount (float),
+      "hourly_rate": Rate (float),
+      "gross_wages": Gross wages (float)
+    },
+    ...
+  ]
+}
+
+the dues amount is always the cash amount that is around $0-$60
+
+Please ensure that your solution is robust and handles various edge cases that may arise from the OCR errors.
+
+Here is your first task and for now just just give me the values for the first 5 members. Remember to ONLY provide the json structure and nothing else do not add "```json ":

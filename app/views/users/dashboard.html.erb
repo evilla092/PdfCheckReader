@@ -1,4 +1,6 @@
-<h2>You are currently logged in as <%= current_user.email %> </h4> 
+<p>Welcome to your Check Checker Dashboard</p>
+<h2>You are currently logged in as <strong> <%= current_user.email %></strong> </h4> 
+<hr>
 
 <%= render "documents/upload_form" %>
 <br>
@@ -7,19 +9,19 @@
 <br>
 <br>
 
-<%= link_to 'Checks Processed Log', checks_path %>
+<%= link_to 'Checks Processed Log', checks_path, class: "btn btn-lg btn-dark fw-bold" %>
+
 
 <br>
 <br>
-
-<%= link_to "Add Employer", new_employer_path %>
+<%= link_to 'Add an Employer', new_employer_path, class: "btn btn-lg btn-dark fw-bold" %>
 <br>
 <br>
 
-<h4><%= link_to 'Employers', employers_path %><h4>
-<br>
-<ul>
+<ul class="list-group">
+<strong><li class="list-group-item"> <%= link_to 'Employers', employers_path %></li></strong>
 <% Employer.all.each do |employer| %>
-<li> <%= employer.name %> </li>
+<li class="list-group-item"> <%= employer.name %> </li>
 <% end %>
+
 </ul>

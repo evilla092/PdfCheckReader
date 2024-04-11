@@ -3,12 +3,29 @@
 <h1>Checks</h1>
 
 <div id="checks">
-  <% @checks.each do |check| %>
-    <%= render check %>
-    <p>
-      <%= link_to "Show this check", check %>
-    </p>
-  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Employer</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Infractions</th>
+        <th>Info</th>
+        <!-- Add more headers as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <% Check.all.each do |check| %>
+        <tr>
+          <td><%= check.id %></td>
+          <td><%= check.employer.name %></td>
+          <td><%= check.check_date %></td>
+          <td><%= check.check_amount %></td>
+          <td><%= check.infraction_count %></td>
+          <td><%= link_to "Show this check", check %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-
-<%= link_to "New check", new_check_path %>
