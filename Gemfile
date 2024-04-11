@@ -89,6 +89,7 @@ gem "aws-sdk"
 gem 'aws-sdk-textract'
 gem 'httparty'
 gem 'json'
+gem 'csv'
 
 
 

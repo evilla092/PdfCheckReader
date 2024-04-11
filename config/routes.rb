@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   # root "articles#index"
   get "/documents/survey", to: "documents#survey"
   get "/documents/loading", to: "documents#loading"
+  get "/users/dashboard", to: "users#dashboard"
+  get '/documents/download_csv', to: 'documents#download_csv', as: 'download_csv_your_controller'
   resources :documents
   
-  root "users#dashboard"
+  root "users#home"
 end

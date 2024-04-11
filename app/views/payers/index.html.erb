@@ -2,6 +2,11 @@
 
 <h1>Payers</h1>
 
+<div class="text-center">
+<%= link_to "Click here to download an Excel version", download_csv_your_controller_path, class: "btn btn-primary" %>
+</div>
+
+
 <div id="payers">
   <% @payers.each do |payer| %>
     <%= render payer %>

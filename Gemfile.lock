@@ -1641,6 +1641,7 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
+    csv (3.3.0)
     date (3.3.3)
     debug (1.7.2)
       irb (>= 1.5.0)
@@ -1962,6 +1963,7 @@ DEPENDENCIES
   binding_of_caller
   bootsnap
   capybara
+  csv
   debug
   devise
   dotenv-rails

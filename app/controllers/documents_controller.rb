@@ -1,7 +1,7 @@
 require "aws-sdk-s3"
 require "aws-sdk-textract"
 require "json"
-require 'httparty'
+require "httparty"
 
 class DocumentsController < ApplicationController
   def create
@@ -24,37 +24,81 @@ class DocumentsController < ApplicationController
     @new_check = Check.new
     @new_check.employer_id = params[:employer_id]
     @new_check.user_id = current_user.id
+    @new_check.check_date = Date.today
+    @new_check.check_amount = 200.00
+    @new_check.save
     document = params[:s3_name]
     bucket = "textract-console-us-east-2-4b222d35-ecba-47d6-8c8c-ca0b8742fcf2"
     @results = get_results(document, bucket)
     @results = process_lines(@results).to_s
-    new_hash = hash_from_gpt(@results)
-
+    @new_hash = hash_from_gpt(@results).to_s
+    @hash = JSON.parse(@new_hash).fetch("members")
+    @hash.each do |record|
+      new_payer = Payer.new
+      new_payer.name = record.fetch("name")
+      new_payer.dues_amount = record.fetch("dues_amount")
+      new_payer.hourly_rate = record.fetch("hourly_rate")
+      new_payer.check_id = @new_check.id
+      new_payer.save
+    
+    end
+    redirect_to payers_path
     
 
     # @parsed_results = parse_data(results)
   end
 
+  def download_csv
+    # Query the data from your model
+    data = Payer.all
+
+    # Generate the CSV file
+    csv_data = generate_csv(data)
+
+    # Send the CSV file as a download
+    send_data csv_data, filename: 'data.csv', type: 'text/csv'
+  end
+
   private
 
-  def hash_from_gpt(prompt)
-    api_key = ENV["OPEN_AI_KEY"] # Store your API key securely in environment 
-    assistant_id = ENV['CHATGPT_ASSISTANT_ID']
+  def generate_csv(data)
+    CSV.generate do |csv|
+      # Write the header row
+      csv << Payer.column_names
+
+      # Write each record as a row in the CSV file
+      data.find_each do |record|
+        csv << record.attributes.values
+      end
+    end
+  end
+
+  def hash_from_gpt(string_array)
+    prompt_file_path = Rails.root.join("app", "data", "prompt.txt")
+    prompt = File.read(prompt_file_path).strip + string_array
+    api_key = ENV["OPEN_AI_KEY"] # Store your API key securely in environment
 
     response = HTTParty.post(
-      'https://api.openai.com/v1/completions',
+      "https://api.openai.com/v1/chat/completions",
       headers: {
-        'Content-Type' => 'application/json',
-        'Authorization' => "Bearer #{api_key}"
+        "Content-Type" => "application/json",
+        "Authorization" => "Bearer #{api_key}",
       },
       body: {
-        model: assistant_id, # Use the assistant ID as the model
-        prompt: prompt,
-        max_tokens: 100
-      }.to_json
+        model: "gpt-4-turbo",
+        messages: [
+          {
+            role: "system",
+            content: "Prompt: " + prompt,
+          },
+        ],
+        max_tokens: 500, # Or any other value you prefer
+        temperature: 0.7, # Control the randomness of the generated completions
+      }.to_json,
     )
 
-    response.body
+    result = JSON.parse(response.body).fetch("choices").at(0).fetch("message").fetch("content")
+  
   end
 
   def document_params
@@ -74,7 +118,6 @@ class DocumentsController < ApplicationController
       feature_types: ["TABLES"],
     }
     response = client.analyze_document(request)
-
   end
 
   def parse_lines_from_textract_response(textract_response)
@@ -98,4 +141,6 @@ class DocumentsController < ApplicationController
 
     text_results
   end
+
+
 end
