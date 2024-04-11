@@ -33,4 +33,4 @@ the dues amount is always the cash amount that is around $0-$60
 
 Please ensure that your solution is robust and handles various edge cases that may arise from the OCR errors.
 
-Here is your first task and for now just just give me the values for the first 2 members. Remember to ONLY provide the json structure and nothing else do not add "```json ":
+Here is your first task and for now just just give me the values for the first 5 members. Remember to ONLY provide the json structure and nothing else do not add "```json ":

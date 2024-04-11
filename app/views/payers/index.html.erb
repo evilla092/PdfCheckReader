@@ -3,17 +3,35 @@
 <h1>Payers</h1>
 
 <div class="text-center">
-<%= link_to "Click here to download an Excel version", download_csv_your_controller_path, class: "btn btn-primary" %>
+<%= link_to "Click here to download an Excel version", download_csv_path, class: "btn btn-primary" %>
 </div>
-
+<hr>
 
 <div id="payers">
-  <% @payers.each do |payer| %>
-    <%= render payer %>
-    <p>
-      <%= link_to "Show this payer", payer %>
-    </p>
-  <% end %>
-</div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Rate</th>
+        <th>Hours Worked</th>
+        <th>Check ID</th>
+        <th>Info</th>
 
-<%= link_to "New payer", new_payer_path %>
+        <!-- Add more headers as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <% Payer.all.each do |payer| %>
+        <tr>
+          <td><%= payer.id %></td>
+          <td><%= payer.name %></td>
+          <td><%= payer.hourly_rate %></td>
+          <td><%= payer.dues_amount %></td>
+          <td><%= payer.check_id %></td>
+          <td><%= link_to "Show this payer", payer %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

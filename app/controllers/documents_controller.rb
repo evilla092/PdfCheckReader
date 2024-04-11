@@ -92,7 +92,7 @@ class DocumentsController < ApplicationController
             content: "Prompt: " + prompt,
           },
         ],
-        max_tokens: 500, # Or any other value you prefer
+        max_tokens: 1500, # Or any other value you prefer
         temperature: 0.7, # Control the randomness of the generated completions
       }.to_json,
     )
