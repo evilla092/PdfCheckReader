@@ -1,6 +1,7 @@
 require "aws-sdk-s3"
 require "aws-sdk-textract"
 require "json"
+require 'httparty'
 
 class DocumentsController < ApplicationController
   def create
@@ -26,10 +27,34 @@ class DocumentsController < ApplicationController
     document = params[:s3_name]
     bucket = "textract-console-us-east-2-4b222d35-ecba-47d6-8c8c-ca0b8742fcf2"
     @results = get_results(document, bucket)
+    @results = process_lines(@results).to_s
+    new_hash = hash_from_gpt(@results)
+
+    
+
     # @parsed_results = parse_data(results)
   end
 
   private
+
+  def hash_from_gpt(prompt)
+    api_key = ENV["OPEN_AI_KEY"] # Store your API key securely in environment variables
+
+    response = HTTParty.post(
+      'https://api.openai.com/v1/completions',
+      headers: {
+        'Content-Type' => 'application/json',
+        'Authorization' => "Bearer #{api_key}"
+      },
+      body: {
+        model: 'asst_Zvf9ji4HVJuzGudSitoP6ee7', # Adjust the model according to your preference
+        prompt: prompt,
+        max_tokens: 100
+      }.to_json
+    )
+
+    response.body
+  end
 
   def document_params
     params.require(:document).permit(:file)
@@ -48,36 +73,28 @@ class DocumentsController < ApplicationController
       feature_types: ["TABLES"],
     }
     response = client.analyze_document(request)
-    response.to_h
-    # detected_text = response.blocks.map(&:text)
-    # detected_text.join("\n")
 
   end
 
-  def parse_data(data)
-    parsed_data = JSON.parse(data)
-    parsed_string = ""
-
-    parsed_data.each do |key, value|
-      parsed_string << "Key: #{key}\n"
-
-      if value.is_a?(Hash)
-        parsed_string << "Value: (Hash)\n"
-        value.each do |nested_key, nested_value|
-          parsed_string << "  Nested Key: #{nested_key}, Nested Value: #{nested_value}\n"
-        end
-      elsif value.is_a?(Array)
-        parsed_string << "Value: (Array)\n"
-        value.each_with_index do |element, index|
-          parsed_string << "  Element #{index}: #{element}\n"
-        end
-      else
-        parsed_string << "Value: #{value}\n"
+  def parse_lines_from_textract_response(textract_response)
+    textract_response[:blocks].each do |block|
+      if block[:block_type] == "LINE"
+        # Extract information from the line block
+        text = block[:text]
+        confidence = block[:confidence]
+        # Process the extracted line information here
+        yield(text, confidence) if block_given?
       end
+    end
+  end
 
-      parsed_string << "--------------------------\n"
+  def process_lines(textract_response)
+    text_results = Array.new
+    parse_lines_from_textract_response(textract_response) do |text, confidence|
+      # Process the extracted line information here
+      text_results.push(text)
     end
 
-    parsed_string
+    text_results
   end
 end
