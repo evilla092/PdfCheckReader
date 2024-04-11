@@ -38,7 +38,8 @@ class DocumentsController < ApplicationController
   private
 
   def hash_from_gpt(prompt)
-    api_key = ENV["OPEN_AI_KEY"] # Store your API key securely in environment variables
+    api_key = ENV["OPEN_AI_KEY"] # Store your API key securely in environment 
+    assistant_id = ENV['CHATGPT_ASSISTANT_ID']
 
     response = HTTParty.post(
       'https://api.openai.com/v1/completions',
@@ -47,7 +48,7 @@ class DocumentsController < ApplicationController
         'Authorization' => "Bearer #{api_key}"
       },
       body: {
-        model: 'asst_Zvf9ji4HVJuzGudSitoP6ee7', # Adjust the model according to your preference
+        model: assistant_id, # Use the assistant ID as the model
         prompt: prompt,
         max_tokens: 100
       }.to_json
