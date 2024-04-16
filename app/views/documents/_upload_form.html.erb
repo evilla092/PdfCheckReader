@@ -1,4 +1,9 @@
-<h3>Upload a PDF</h3>
+<br>
+<div class="text-center">
+    <h3>Upload a PDF</h3>
+</div>
+
+<br>
 
 <%#= form_with model: @document, url: documents_path, local: true do |form| %>
   <%#= form.file_field :file %>
@@ -7,6 +12,12 @@
 <!---->
 
 <%= form_with model: @document, url: documents_path, local: true do |form| %>
-  <%= form.file_field :file, name: 'document[file]' %>
-  <%= form.submit %>
+  <div class="mb-3 d-flex align-items-center">
+    <!-- File input field with Bootstrap classes -->
+    <%= form.file_field :file, name: 'document[file]', class: 'form-control form-control-lg me-2', id: 'formFileLg' %>
+
+    <!-- Submit button with Bootstrap classes -->
+    <%= form.submit 'Submit', class: 'btn btn-dark' %>
+  </div>
 <% end %>
+<br>

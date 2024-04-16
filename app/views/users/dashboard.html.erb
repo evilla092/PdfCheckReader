@@ -1,27 +1,22 @@
 <p>Welcome to your Check Checker Dashboard</p>
-<h2>You are currently logged in as <strong> <%= current_user.email %></strong> </h4> 
+<h2>You are currently logged in as <strong><%= current_user.email %></strong></h2> 
 <hr>
 
 <%= render "documents/upload_form" %>
-<br>
 
+<div class="mt-4 d-flex justify-content-center">
+    <!-- Button for Checks Processed Log -->
+    <%= link_to 'Checks Processed Log', checks_path, class: "btn btn-lg btn-dark fw-bold mx-2" %>
 
-<br>
-<br>
+    <!-- Button for Add an Employer -->
+    <%= link_to 'Add an Employer', new_employer_path, class: "btn btn-lg btn-dark fw-bold mx-2" %>
+</div>
 
-<%= link_to 'Checks Processed Log', checks_path, class: "btn btn-lg btn-dark fw-bold" %>
-
-
-<br>
-<br>
-<%= link_to 'Add an Employer', new_employer_path, class: "btn btn-lg btn-dark fw-bold" %>
-<br>
-<br>
-
-<ul class="list-group">
-<strong><li class="list-group-item"> <%= link_to 'Employers', employers_path %></li></strong>
-<% Employer.all.each do |employer| %>
-<li class="list-group-item"> <%= employer.name %> </li>
-<% end %>
-
+<ul class="list-group mt-4">
+    <strong><li class="list-group-item">
+        <%= link_to 'Employers', employers_path, style: "color: black;" %>
+    </li></strong>
+    <% Employer.all.each do |employer| %>
+        <li class="list-group-item"> <%= employer.name %> </li>
+    <% end %>
 </ul>

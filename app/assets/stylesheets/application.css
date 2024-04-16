@@ -6,3 +6,48 @@
 .bg-clear {
   background-color: rgba(255, 255, 255, 0.5);
 }
+
+body {
+  background-color: rgb(253,253,253);
+}
+
+/* Custom CSS for navbar logo container */
+.img-responsive {
+  height: 70px;
+  width: auto;
+  max-height: 70px;
+  max-width: 250px;
+}
+
+/* Navbar logo */
+.navbar-logo {
+  width: 100%; /* Fill the container's width */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Remove extra space */
+  max-height: 50px; /* Adjust the height of the logo */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar-brand {
+      text-align: center; /* Center the logo */
+  }
+  
+  .container {
+      padding-left: 15px;
+      padding-right: 15px;
+  }
+  
+  .display-6 {
+      font-size: 1.5rem; /* Reduce font size */
+  }
+  
+  .lead {
+      font-size: 1rem; /* Reduce font size */
+  }
+  
+  /* Adjust image size */
+  .image-container img {
+      max-width: 100%; /* Ensure the image fills the container */
+  }
+}
