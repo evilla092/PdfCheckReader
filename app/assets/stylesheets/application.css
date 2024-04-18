@@ -51,3 +51,7 @@ body {
       max-width: 100%; /* Ensure the image fills the container */
   }
 }
+
+.logo{
+  width: 8rem;
+}
