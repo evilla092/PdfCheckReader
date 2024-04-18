@@ -1,12 +1,12 @@
 <h1>Document Details</h1>
 <% @document %>
-<p>s3 name: <%= @s3_name %></p>
+
 
 
 <div class="text-center">
 <p>Is this the file you are trying to process?</p>
-<%= link_to "Yes, begin processing", "/documents/survey?s3_name=#{@s3_name}", class: "btn btn-primary" %>
-<%= link_to "No, upload a different file", root_path, class: "btn btn-primary" %>
+<%= link_to "Yes, begin processing", "/documents/survey?s3_name=#{@s3_name}", class: "btn btn-dark" %>
+<%= link_to "No, upload a different file", root_path, class: "btn btn-dark" %>
 </div>
 <br>
 

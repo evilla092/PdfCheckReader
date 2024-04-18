@@ -13,8 +13,8 @@
       <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Dues Amount</th>
         <th>Rate</th>
-        <th>Hours Worked</th>
         <th>Check ID</th>
         <th>Info</th>
 
@@ -26,8 +26,8 @@
         <tr>
           <td><%= payer.id %></td>
           <td><%= payer.name %></td>
-          <td><%= payer.hourly_rate %></td>
           <td><%= payer.dues_amount %></td>
+          <td><%= payer.hourly_rate %></td>
           <td><%= payer.check_id %></td>
           <td><%= link_to "Show this payer", payer %></td>
         </tr>

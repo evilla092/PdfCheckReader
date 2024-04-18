@@ -1,16 +1,21 @@
-
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column justify-content-center align-items-center">
-
-  <main class="text-center px-3">
-    <h1>Check Checker!</h1>
-    <p class="lead">Convert your checks from PDF format to excel format easily using AI and machine learning to give you best results. Set specific logic to trigger flags for certain cases caused by incorrect amounts. Read full line item results immediately. </p>
-    <div class="image-container">
-      <img src="https://www.moneyhub.co.nz/uploads/1/1/2/1/112100199/what-is-the-ocr-glossary_orig.jpg" alt="Descriptive text" class="img-fluid">
-    </div>
-    <p class="lead">
-      <a href="/users/dashboard" class="btn btn-lg btn-secondary fw-bold border-white bg-black">Get Started</a>
-    </p>
-  </main>
-
-
+<div class="container-fluid d-flex h-90 flex-column justify-content-center align-items-center text-center py-4 mb-4" style="background: rgb(253,253,253);">
+    <div class="container">
+        <!-- Section header -->
+        <h3 class="display-6 mb-4 fw-bold text-black">Revolutionize Your Financial Management</h3>
+        
+        <!-- Summary -->
+        <p class="lead mb-4">Experience seamless check conversion with AI and machine learning! Instantly transform PDF checks into Excel format and set up custom rules to flag discrepancies. Gain instant insights and precise line item results for efficient financial management.</p>
+        
+        <!-- Checker image without shadow -->
+        <div class="image-container mt-4">
+            <img src="<%= asset_path('check_checker.png') %>" class="img-fluid rounded w-50" alt="Checker Image">
+        </div>
+        
+        <!-- Call-to-action button with hover effect -->
+        <div class="mt-4">
+            <a href="/users/dashboard" class="btn btn-lg btn-dark fw-bold mb-4" style="transition: background-color 0.3s, color 0.3s;" onmouseover="this.style.backgroundColor='var(--bs-warning)'; this.style.color='black';" onmouseout="this.style.backgroundColor='black'; this.style.color='white';">Get Started</a>
+        </div>
+        
+        <!-- Optional testimonial for social proof -->
+      
 </div>
