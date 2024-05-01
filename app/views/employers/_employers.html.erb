@@ -1,0 +1,8 @@
+<ul class="list-group mt-4">
+    <strong><li class="list-group-item">
+        <%= link_to 'Employers', employers_path, style: "color: black;" %>
+    </li></strong>
+    <% Employer.all.each do |employer| %>
+        <li class="list-group-item"> <%= employer.name %> </li>
+    <% end %>
+</ul>
