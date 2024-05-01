@@ -25,7 +25,7 @@ class DocumentsController < ApplicationController
     @new_check.employer_id = params[:employer_id]
     @new_check.user_id = current_user.id
     @new_check.check_date = Date.today
-    @new_check.check_amount = 200.00
+    @new_check.check_amount = rand(1800.0..2500.0).round(2)
     @new_check.save
     document = params[:s3_name]
     bucket = "textract-console-us-east-2-4b222d35-ecba-47d6-8c8c-ca0b8742fcf2"
@@ -43,9 +43,7 @@ class DocumentsController < ApplicationController
     
     end
     redirect_to payers_path
-    
-
-    # @parsed_results = parse_data(results)
+  
   end
 
   def download_csv
