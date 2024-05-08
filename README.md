@@ -64,4 +64,22 @@ Having to manually read and type out information from financial files that come 
 
 # Code Review
 ## Documentation
-- 
+- Missing installation instructions
+- Missing contribution guidelines
+
+## Version Control
+- No issue tracking and pull requests
+- Good branching and merging overall
+
+## Code Hygiene
+- Make sure to use consistent indentation throughout 
+- Code clarity could be improved by removing files that are empty/not in use and commented out lines of code
+
+## Frontend
+- Good responsive design
+
+## Backend 
+- Installation instructions were not complete.
+- No sample_data task
+- Consider adding authorization framework such as Pundit
+- Good job using cloud storage, services & CSV
