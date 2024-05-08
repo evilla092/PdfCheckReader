@@ -24,5 +24,5 @@ class Payer < ApplicationRecord
   belongs_to :check
   has_many :employers, through: :check
   has_many :infractions
-  
+  # Nitpick: keep spacing consistent! Remove this unnecessary line
 end
