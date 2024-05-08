@@ -59,3 +59,9 @@ Having to manually read and type out information from financial files that come 
 - updated_at
 - detail_infraction_count
 - check_id
+
+<hr>
+
+# Code Review
+## Documentation
+- 

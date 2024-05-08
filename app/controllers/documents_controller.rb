@@ -40,10 +40,10 @@ class DocumentsController < ApplicationController
       new_payer.hourly_rate = record.fetch("hourly_rate")
       new_payer.check_id = @new_check.id
       new_payer.save
-    
+
     end
     redirect_to payers_path
-  
+
   end
 
   def download_csv
@@ -96,7 +96,7 @@ class DocumentsController < ApplicationController
     )
 
     result = JSON.parse(response.body).fetch("choices").at(0).fetch("message").fetch("content")
-  
+
   end
 
   def document_params
@@ -139,6 +139,6 @@ class DocumentsController < ApplicationController
 
     text_results
   end
-
+# Nitpick: keep spacing consistent. Remove extra blank line
 
 end
